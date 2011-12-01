@@ -34,16 +34,9 @@ class LoginForm(forms.Form):
 
 
 class CustomDisplayModelChoiceField(forms.ModelChoiceField):
-    def __init__(self, queryset, display_fx, empty_label=u"---------",
-                 cache_choices=False,
-                 required=True, widget=None, label=None, initial=None,
-                 help_text=None, to_field_name=None, *args, **kwargs):
-        self.display_fx = display_fx
-        
-        super(CustomDisplayModelChoiceField, self).__init__(queryset,
-                empty_label=u"---------", cache_choices=False,
-                required=True, widget=None, label=None, initial=None,
-                help_text=None, to_field_name=None, *args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        self.display_fx = kwargs.pop("display_fx")
+        super(CustomDisplayModelChoiceField, self).__init__(*args, **kwargs)
     
     def label_from_instance(self, obj):
          return self.display_fx(obj)
