@@ -7,10 +7,12 @@ from django.shortcuts import render_to_response
 # errors
 def error_404(request):
 	MEDIA_URL = settings.MEDIA_URL
-	return render_to_response('404.html',
+	response = render_to_response('404.html',
 			{
 				'MEDIA_URL': settings.MEDIA_URL,
 			})
+	response.status_code = 404
+	return response
 
 
 def server_error(request, template_name='500.html'):
