@@ -8,7 +8,7 @@ class NameAndSlug(models.Model):
     convenience model for things that are just names
     '''
     name = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=200)
     
     def __unicode__(self):
         return self.name

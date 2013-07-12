@@ -20,3 +20,14 @@ def server_error(request, template_name='500.html'):
 	return HttpResponseServerError(t.render(Context({
 		'MEDIA_URL': settings.MEDIA_URL,
 	})))
+
+def better_server_error(request, template_name='500.html'):
+    t = loader.get_template(template_name)
+    ltype, lvalue, ltraceback = sys.exc_info()
+    sys.exc_clear()
+    return HttpResponseServerError(t.render(Context({
+            'MEDIA_URL': settings.MEDIA_URL,
+            'type': ltype,
+            'value': lvalue,
+            'traceback': ltraceback
+    })))
