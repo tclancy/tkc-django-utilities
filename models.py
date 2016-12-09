@@ -46,6 +46,11 @@ class LocationManager(models.Manager):
         Given a zip code (or lat/ long pair) and a radius, find all model objects
         inside the area. Pass the name of the object table and the
         name of the zip code table to create the join
+        
+        TODO: these have nasty SQL injection vulnerabilities due to me not
+        wanting to fight with the dynamic names vs parameter insertion and just
+        hacking them together. Need to revise, split out the table name replacement
+        and move to parameters.
         """
         if use_miles:
             distance_unit = 3959
